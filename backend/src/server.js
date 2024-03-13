@@ -9,6 +9,8 @@ import userRoute from "./routes/userRoute.js";
 import commentsRoute from "./routes/commentsRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 dotenv.config();
 
@@ -39,6 +41,20 @@ app.use((err, req, res, next) => {
   app.use("/api/auth",authRoute);
   app.use("/api/users",userRoute);
   app.use("/api/comments",commentsRoute)
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  
+  // Serve static files from the build directory
+  app.use(express.static(path.join(__dirname, 'frontend/build')));
+  
+  // Define your API routes here
+  
+  // For any other requests, serve the frontend index.html file
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
+  });
 
 const PORT = process.env.PORT || 4000;
 
