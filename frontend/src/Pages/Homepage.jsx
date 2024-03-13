@@ -25,7 +25,6 @@ const Homepage = ({type}) => {
         setVideos(res.data);
         setLoading(false);
       }catch(err){
-        console.log(err.message);
         setError(err.message); 
         setLoading(false);
       }
@@ -39,7 +38,7 @@ const Homepage = ({type}) => {
           ) : error ? (
             <ErrorComponent></ErrorComponent>
           ) :(O.map((video)=>{
-            return <Suspense fallback="...loading"><Card key={video._id} video={video}></Card></Suspense>
+            return <Suspense  key={video._id} fallback="...loading"><Card  video={video}></Card></Suspense>
           }))}
     </Container>
   )

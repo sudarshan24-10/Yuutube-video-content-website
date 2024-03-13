@@ -168,7 +168,6 @@ const Upload = ({setOpen}) => {
     setOpen(false)
     res.status===200 && navigate(`/video/${res.data._id}`)
     }catch(e){
-      console.log(e);
       let message="Please fill all fields"
       toast.error(message);
     }

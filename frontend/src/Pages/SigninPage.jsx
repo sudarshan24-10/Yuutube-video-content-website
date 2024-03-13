@@ -104,7 +104,6 @@ const SignIn = () => {
 
   const handleSignIn=async (e) =>{
     e.preventDefault();
-    console.log(name,password);
     dispatch(loginStart());
     try{
       const res=await axios.post("/auth/signin",{name,password});
@@ -121,7 +120,6 @@ const SignIn = () => {
   const signInWithGoole= async ()=>{
     dispatch(loginStart());
     signInWithPopup(auth,provider).then((result)=>{
-      console.log(result);
       axios.post("/auth/google",{
         name:result.user.displayName,
         email:result.user.email,

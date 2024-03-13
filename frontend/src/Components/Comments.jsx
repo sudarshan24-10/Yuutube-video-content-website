@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { List } from "react-virtualized";
 import { toast } from "react-toastify";
 
 
@@ -44,7 +43,6 @@ const Comments = ({videoId}) => {
   const [comments, setComments] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
   const [input, setInput] = useState("");
-  const inputRef = useRef(null);
   const handleFocus = () => {
     setIsFocused(true);
   };
@@ -52,12 +50,11 @@ const Comments = ({videoId}) => {
     const fetchComments = async () => {
       try {
         const res = await axios.get(`/comments/${videoId}`);
-        console.log(res.data)
         setComments(res.data);
       } catch (err) {}
     };
     fetchComments();
-  }, [videoId,inputRef.current]);
+  }, [videoId]);
 
   const addCommentRequest={
     videoId: videoId,
@@ -76,7 +73,6 @@ const Comments = ({videoId}) => {
     }
     try{
       const res=await axios.post("/comments/",addCommentRequest);
-      console.log(res);
       window.location.reload();
     }catch(err){
       toast.error('Some issue with adding comments');
