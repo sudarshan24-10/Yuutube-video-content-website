@@ -2,15 +2,14 @@ import express from 'express';
 import dotenv from "dotenv";
 import morgan from "morgan";
 import mongoose from 'mongoose';
-import videoRoute from "./routes/videoRoute.js";
-import authRoute from "./routes/authRoute.js";
+import videoRoute from "./src/routes/videoRoute.js";
+import authRoute from "./src/routes/authRoute.js";
 import bodyParser from 'body-parser';
-import userRoute from "./routes/userRoute.js";
-import commentsRoute from "./routes/commentsRoute.js";
+import userRoute from "./src/routes/userRoute.js";
+import commentsRoute from "./src/routes/commentsRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { fileURLToPath } from 'url';
-import path from 'path';
+
 
 dotenv.config();
 
@@ -47,7 +46,7 @@ app.use((err, req, res, next) => {
 
   
   // Serve static files from the build directory
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
+  app.use(express.static(path.join(__dirname, 'frontend/build')));
   
   // Define your API routes here
   
