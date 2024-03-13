@@ -9,6 +9,8 @@ import userRoute from "./src/routes/userRoute.js";
 import commentsRoute from "./src/routes/commentsRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 
 dotenv.config();
