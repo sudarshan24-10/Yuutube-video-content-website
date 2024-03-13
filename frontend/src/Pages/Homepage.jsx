@@ -12,7 +12,7 @@ flex-wrap:wrap;
 
 const Homepage = ({type}) => {
 
-  const [videos,setVideos] = useState([]);
+  const [O,setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -38,7 +38,7 @@ const Homepage = ({type}) => {
           <Loading></Loading>
           ) : error ? (
             <ErrorComponent></ErrorComponent>
-          ) :(videos.map((video)=>{
+          ) :(O.map((video)=>{
             return <Suspense fallback="...loading"><Card key={video._id} video={video}></Card></Suspense>
           }))}
     </Container>
