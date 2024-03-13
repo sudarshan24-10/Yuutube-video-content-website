@@ -27,11 +27,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-    
-      <ErrorBoundary onError={(e) => console.log(e.message)} FallbackComponent={FallbackComponent}>
         <App />
-      </ErrorBoundary>
-      
     </PersistGate>
   </Provider>
   </React.StrictMode>
