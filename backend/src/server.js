@@ -47,7 +47,7 @@ app.use((err, req, res, next) => {
 
   
   // Serve static files from the build directory
-  app.use(express.static(path.join(__dirname, 'frontend/build')));
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
   
   // Define your API routes here
   
