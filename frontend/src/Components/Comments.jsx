@@ -72,7 +72,7 @@ const Comments = ({videoId}) => {
       return;
     }
     try{
-      const res=await axios.post("/comments/",addCommentRequest);
+      await axios.post("/comments/",addCommentRequest);
       window.location.reload();
     }catch(err){
       toast.error('Some issue with adding comments');
@@ -85,7 +85,6 @@ const Comments = ({videoId}) => {
         <Avatar src={currentUser?.img} atl="channelImg" />
         <Input
         onChange={(e)=>{setInput(e.target.value)}}
-        isFocused={isFocused}
         onClick={handleFocus}
         placeholder="Add a comment..."/>
         

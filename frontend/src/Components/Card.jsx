@@ -71,8 +71,7 @@ const Card = ({ type,video }) => {
 
   const handleViews=async ()=>{
     try{
-      const res=await axios.put(`http://localhost:8800/api/video/view/${video._id}`);
-      
+      await axios.put(`http://localhost:8800/api/video/view/${video._id}`);
     }catch(e){
       console.log(e);
     }
