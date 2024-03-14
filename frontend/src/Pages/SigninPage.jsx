@@ -114,7 +114,8 @@ const SignIn = () => {
       }
     }catch(e){
       dispatch(loginFailure());
-      toast.error(e.message);
+      console.log(e);
+      toast.error(e.response.data);
     }
   }
 
