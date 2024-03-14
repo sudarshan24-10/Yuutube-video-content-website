@@ -6,7 +6,6 @@ import "../src/index.css";
 import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function FallbackComponent({ error, resetErrorBoundary }) {
@@ -27,11 +26,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-    
       <ErrorBoundary onError={(e) => console.log(e.message)} FallbackComponent={FallbackComponent}>
         <App />
       </ErrorBoundary>
-      
     </PersistGate>
   </Provider>
   </React.StrictMode>

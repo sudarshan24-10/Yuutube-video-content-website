@@ -164,9 +164,9 @@ const Upload = ({setOpen}) => {
   const handleUpload = async (e)=>{
     e.preventDefault();
     try{
-      const res = await axios.post("/video", {...inputs, tags})
+      const res = await axios.post("http://localhost:8800/api/video", {...inputs, tags})
     setOpen(false)
-    res.status===200 && navigate(`/video/${res.data._id}`)
+    res.status===200 && navigate(`http://localhost:8800/api/video/${res.data._id}`)
     }catch(e){
       let message="Please fill all fields"
       toast.error(message);

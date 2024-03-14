@@ -152,7 +152,7 @@ const Menu = (props) => {
       <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Logo>
             <Img src={VidTube} />
-            VidTube
+            YuuTube
           </Logo>
         </Link>
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
@@ -198,7 +198,7 @@ const Menu = (props) => {
             <Hr />
           </>
         }
-        <Title>BEST OF VIDTUBE</Title>
+        <Title>BEST OF YUUTUBE</Title>
         <Item>
           <LibraryMusicOutlinedIcon />
           Music

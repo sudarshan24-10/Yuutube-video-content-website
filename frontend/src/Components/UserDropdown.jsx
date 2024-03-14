@@ -4,12 +4,9 @@ import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
 import EditIcon from '@mui/icons-material/Edit';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch } from 'react-redux';
-import { loginFailure, loginStart, loginSuccess, logout } from '../redux/userSlice';
-import { signInWithPopup } from 'firebase/auth';
-import {auth,provider} from "../firebase";
+import { logout } from '../redux/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+
 const Container = styled.div`
   margin-top:0.5rem;
   position: fixed;
@@ -42,7 +39,7 @@ const EditAccount = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.soft};
     cursor: pointer;
-    color: blue;
+    color: rgb(101, 144, 209);
   }
 `;
 
@@ -59,7 +56,7 @@ const SwitchAccount = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.soft};
     cursor: pointer;
-    color: blue;
+    color: rgb(101, 144, 209);
   }
 `;
 
@@ -85,7 +82,7 @@ const Logout = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.soft};
     cursor: pointer;
-    color: blue;
+    color: rgb(101, 144, 209);
   }
 `;
 
@@ -105,18 +102,18 @@ const UserDropdown = (props) => {
   return (
     <Container>
       <Wrapper>
-        <Link to="account_overview">
-        <EditAccount >
+        <Link to="account_overview" style={{ textDecoration: 'none',width:"100%" }}>
+        <EditAccount>
           <EditIcon></EditIcon>
           Edit Account
         </EditAccount></Link>
         <Hr></Hr>
-        <SwitchAccount onClick={signInWithGoogle}>
+        <SwitchAccount style={{ textDecoration: "none"}} onClick={signInWithGoogle}>
           <SwitchAccountIcon></SwitchAccountIcon>
           SwitchAccount
         </SwitchAccount>
         <Hr></Hr>
-        <Logout onClick={handleLogout}>
+        <Logout style={{ textDecoration: "none" }} onClick={handleLogout}>
           <LogoutIcon></LogoutIcon>Logout</Logout>
       </Wrapper>
     </Container>

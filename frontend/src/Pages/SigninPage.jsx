@@ -6,9 +6,10 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Visibility from "@mui/icons-material/Visibility";
 import { loginStart,loginFailure,loginSuccess } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signInWithRedirect } from "firebase/auth";
 import {auth,provider} from "../firebase";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   display: flex;
@@ -106,7 +107,7 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try{
-      const res=await axios.post("/auth/signin",{name,password});
+      const res=await axios.post("http://localhost:8800/api/auth/signin",{name,password});
       dispatch(loginSuccess(res.data));
       if(res.data){
         navigate("/");
@@ -117,27 +118,30 @@ const SignIn = () => {
     }
   }
 
-  const signInWithGoole= async ()=>{
-    dispatch(loginStart());
-    signInWithPopup(auth,provider).then((result)=>{
-      axios.post("/auth/google",{
-        name:result.user.displayName,
-        email:result.user.email,
-        img:result.user.photoURL
-      }).then((res)=>{
-        dispatch(loginSuccess(res.data));
-        if(res.data){
-          navigate("/");
-        }
+  const signInWithGoogle = async () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        axios
+          .post("http://localhost:8800/api/auth/google", {
+            name: result.user.displayName,
+            email: result.user.email,
+            img: result.user.photoURL,
+          })
+          .then((res) => {
+            console.log(res);
+            dispatch(loginSuccess(res.data));
+            navigate("/")
+          });
       })
-    }).catch((e)=>{
-      dispatch(loginFailure());
-    });
-  }
+      .catch((error) => {
+        console.log(error.message)
+        dispatch(loginFailure());
+      });
+  };
 
   const handleSignup=async()=>{
     try{
-      const res=await axios.post("/auth/signup",{
+      const res=await axios.post("http://localhost:8800/api/auth/signup",{
         name,email,password
       })
       if(res){
@@ -151,6 +155,8 @@ const SignIn = () => {
     }
   }
   return (
+    <>
+    <Helmet><title>Sign In</title></Helmet>
     <Container>
       <Wrapper>
         <Title>Sign in</Title>
@@ -168,7 +174,7 @@ const SignIn = () => {
         </PasswordToggle>
         <Button onClick={(e)=>{handleSignIn(e)}}>Sign in</Button>
         <Title>or</Title>
-        <Button onClick={signInWithGoole}>Sign in with google</Button>
+        <Button onClick={signInWithGoogle}>Sign in with google</Button>
         <Title>or</Title>
         <Input onChange={(e)=>setName(e.target.value)} placeholder="username" />
         <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="email" />
@@ -187,7 +193,7 @@ const SignIn = () => {
       <More>
         <Link style={{ fontSize: "19px" }} to="forgotPassword">Forgot password?</Link>
       </More>
-    </Container>
+    </Container></>
   );
 };
 

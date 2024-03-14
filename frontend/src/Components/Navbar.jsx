@@ -109,7 +109,7 @@ const Navbar = (props) => {
         {props.toggle?<Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Logo>
             <Img src={VidTube} />
-            VidTube
+            YuuTube
           </Logo>
         </Link>:<></>}
           <Search>

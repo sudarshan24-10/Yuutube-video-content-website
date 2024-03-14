@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../Components/Card";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   display: flex;
@@ -15,17 +16,23 @@ const Search = () => {
   const query = useLocation().search;
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/video/search${query}`);
+      const res = await axios.get(`http://localhost:8800/api/video/search${query}`);
       setVideos(res.data);
     };
     fetchVideos();
   }, [query]);
 
-  return <Container>
+  return (
+    <>
+    <Helmet><title>YuuTube</title></Helmet>
+     <Container>
     {videos.map(video=>(
       <Card key={video._id} video={video}/>
     ))}
-  </Container>;
+  </Container>
+    </>
+   
+  );
 };
 
 export default Search;
