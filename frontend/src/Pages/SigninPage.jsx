@@ -6,7 +6,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Visibility from "@mui/icons-material/Visibility";
 import { loginStart,loginFailure,loginSuccess } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
-import { signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { signInWithRedirect } from "firebase/auth";
 import {auth,provider} from "../firebase";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
@@ -120,7 +120,7 @@ const SignIn = () => {
   }
 
   const signInWithGoogle = async () => {
-    signInWithPopup(auth, provider)
+    signInWithRedirect(auth, provider)
       .then((result) => {
         axios
           .post("/api/auth/google", {
@@ -129,9 +129,8 @@ const SignIn = () => {
             img: result.user.photoURL,
           })
           .then((res) => {
-            console.log(res);
             dispatch(loginSuccess(res.data));
-            navigate("/")
+            navigate("/");
           });
       })
       .catch((error) => {
