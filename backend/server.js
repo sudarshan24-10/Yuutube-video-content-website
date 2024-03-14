@@ -15,11 +15,9 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin:'https://youtube-clone-c7xc.onrender.com',
   credentials: true, // Allow credentials (cookies)
 };
 
-console.log(corsOptions);
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
