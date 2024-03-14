@@ -19,6 +19,8 @@ const corsOptions = {
   credentials: true, // Allow credentials (cookies)
 };
 
+console.log(corsOptions);
+
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan("dev"));
