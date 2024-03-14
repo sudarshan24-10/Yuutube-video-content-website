@@ -49,7 +49,7 @@ const Comments = ({videoId}) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/api/comments/${videoId}`);
+        const res = await axios.get(`/api/comments/${videoId}`);
         setComments(res.data);
       } catch (err) {}
     };
@@ -72,7 +72,7 @@ const Comments = ({videoId}) => {
       return;
     }
     try{
-      await axios.post("http://localhost:8800/comments/",addCommentRequest);
+      await axios.post("/api/comments/",addCommentRequest);
       window.location.reload();
     }catch(err){
       toast.error('Some issue with adding comments');

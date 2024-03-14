@@ -7,12 +7,12 @@ const Container = styled.div`
   flex: 2;
 `;
 
-const Recommendation = ({ tags }) => {
+const Recommendation = ({tags}) => {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`http://localhost:8800/api/video/tags?tags=${tags}`);
-
+      const res=await axios.get(`/api/videos/tags?tags=${tags}`);
+      console.log(res.data);
       setVideos(res.data);
     };
     fetchVideos();
@@ -20,8 +20,8 @@ const Recommendation = ({ tags }) => {
 
   return (
     <Container>
-      {videos.map((video) => (
-        <Card type="sm" key={video._id} video={video} />
+      {videos.map((video,i) => (
+        <Card type="sm" key={i} video={video} />
       ))}
     </Container>
   );

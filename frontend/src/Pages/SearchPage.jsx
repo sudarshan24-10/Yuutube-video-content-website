@@ -16,7 +16,7 @@ const Search = () => {
   const query = useLocation().search;
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`http://localhost:8800/api/video/search${query}`);
+      const res = await axios.get(`/api/videos/search${query}`);
       setVideos(res.data);
     };
     fetchVideos();

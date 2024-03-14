@@ -21,8 +21,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
-app.use(morgan("dev"));
 app.use(express.json());
+app.use(morgan('dev'))
 
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log("Connected to DB");
@@ -33,7 +33,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 
 
 // API routes
-app.use("/api/video", videoRoute);
+app.use("/api/videos", videoRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/comments", commentsRoute);
@@ -42,13 +42,6 @@ app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.status || 500).send(err.message || "Internal Server Error");
 });
-
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-app.get("*", (req, res) =>
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"))
-);
-
 
 
 const PORT = process.env.PORT || 4000;

@@ -54,31 +54,31 @@ font-size: 14px;
 color: ${({ theme }) => theme.textSoft};
 `;
 
-const Card = ({ type,video }) => {
+const Card = (props) => {
+  const video=props.video;
+  const type=props.type;
   const [channel,setChannel] = useState({});
-  useEffect(()=>{
-    const fetchChannels= async()=>{
-      try{
-        const res=await axios.get(`http://localhost:8800/api/users/find/${video.userId}`);
-        
-         setChannel(res.data);
-      }catch(err){
+  useEffect(() => {
+    const fetchChannels = async () => {
+      try {
+        const res = await axios.get(`/api/users/find/${video.userId}`);
+        setChannel(res.data);
+      } catch (err) {
         console.log(err.message);
       }
     }
     fetchChannels();
-  },[video.userId])
-
+  }, [video.userId])
   const handleViews=async ()=>{
     try{
-      await axios.put(`http://localhost:8800/api/video/view/${video._id}`);
+      await axios.put(`/api/videos/view/${video._id}`);
     }catch(e){
       console.log(e);
     }
   }
 
   return (
-    <Link to={`/video/${video._id}`} onClick={handleViews} style={{ textDecoration: "none" }}>
+    <Link to={`video/${video._id}`} onClick={handleViews} style={{ textDecoration: "none" }}>
       <Container type={type}>
         <Image
           type={type}

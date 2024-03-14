@@ -2,7 +2,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import Menu from './Components/Menu';
 import Navbar from './Components/Navbar';
 import { darkTheme, lightTheme } from './utils/Theme';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from './Pages/Homepage';
 import VideoPage from './Pages/VideoPage';

@@ -1,49 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import axios from "axios"
-import Loading from '../utils/loading';
-import ErrorComponent from '../utils/Error';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import Card from "../Components/Card";
-import { Helmet } from 'react-helmet';
-const Container=styled.div`
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
+import axios from "axios";
+import Loading from "../utils/loading";
+import ErrorComponent from "../utils/Error";
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 const Homepage = ({type}) => {
   const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const [loading,setLoading]=useState(true);
+  const [Error,setError]=useState(false);
   useEffect(() => {
     const fetchVideos = async () => {
-      try {
-        const res = await axios.get(`http://localhost:8800/api/video/${type}`);
-        console.log('Response data:', res.data); // Log the response data
+      try{
+        const res = await axios.get(`/api/videos/${type}`);
         setVideos(res.data);
         setLoading(false);
-      } catch (err) {
-        setError(err.message); 
-        setLoading(false);
+      }catch(e){
+        setError(true);
       }
-    }
+    };
     fetchVideos();
   }, [type]);
 
   return (
-    <>
-    <Helmet><title>YuuTube</title></Helmet>
     <Container>
-      {
-        loading?<Loading></Loading>:error?<ErrorComponent></ErrorComponent>:videos ? videos.map((video)=>{
-          return <Card key={video._id} video={video}></Card>
-        }):<>No video Found</>
-      }
+      {loading?<Loading></Loading>:Error?<ErrorComponent></ErrorComponent>:videos.map((video)=>(
+        <Card  key={video._id} video={video}></Card>
+      ) 
+      )}
     </Container>
-    </>
-    
   );
-}
+};
 
-export default Homepage
+export default Homepage;

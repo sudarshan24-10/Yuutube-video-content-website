@@ -137,8 +137,8 @@ const VideoPage = () => {
   useEffect(()=>{
     const fetchData=async ()=>{
       try{
-        const res=await axios.get(`http://localhost:8800/api/video/find/${path}`);
-        const channelRes=await axios.get(`http://localhost:8800/api/users/find/${res.data.userId}`);
+        const res=await axios.get(`/api/videos/find/${path}`);
+        const channelRes=await axios.get(`/api/users/find/${res.data.userId}`);
         
         dispatch(fetchSuccess(res.data));
         setLoading(false);
@@ -151,7 +151,7 @@ const VideoPage = () => {
   },[path,dispatch]);
   const handleLike = async () => {
     try{
-      await axios.put(`http://localhost:8800/api/users/like/${currentVideo._id}`,{
+      await axios.put(`/api/users/like/${currentVideo._id}`,{
       });
       dispatch(like(currentUser._id));
     }catch(e){
@@ -160,7 +160,7 @@ const VideoPage = () => {
   };
   const handleDislike = async () => {
     try{
-      await axios.put(`http://localhost:8800/users/api/dislike/${currentVideo._id}`);
+      await axios.put(`/api/users/dislike/${currentVideo._id}`);
     dispatch(dislike(currentUser._id));
     }catch(e){
       toast.error("Please signin to like or dislike");
@@ -173,8 +173,8 @@ const VideoPage = () => {
   const handleSub = async () => {
     try{
       currentUser.subscribedUsers.includes(channel._id)
-      ? await axios.put(`http://localhost:8800/api/users/unsub/${channel._id}`)
-      : await axios.put(`http://localhost:8800/api/users/sub/${channel._id}`);
+      ? await axios.put(`/api/users/unsub/${channel._id}`)
+      : await axios.put(`/api/users/sub/${channel._id}`);
     dispatch(subscription(channel._id));
     }catch(e){
       toast.error("Please Signin to subscribe to the channel");
@@ -237,7 +237,7 @@ const VideoPage = () => {
         <Hr />
         <Comments videoId={currentVideo._id}></Comments>
       </Content>}
-      <Recommendation className="recomendation" tags={currentVideo.tags} />
+      <Recommendation className="recomendation" tags={currentVideo?.tags} />
     </Container>
     </>
   )
