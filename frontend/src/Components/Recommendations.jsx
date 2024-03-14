@@ -20,8 +20,8 @@ const Recommendation = ({tags}) => {
 
   return (
     <Container>
-      {videos.map((video,i) => (
-        <Card type="sm" key={i} video={video} />
+      {videos.map((video) => (
+        <Card type="sm" key={video._id} video={video} />
       ))}
     </Container>
   );

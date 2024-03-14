@@ -78,7 +78,7 @@ const Card = (props) => {
   }
 
   return (
-    <Link to={`video/${video._id}`} onClick={handleViews} style={{ textDecoration: "none" }}>
+    <Link to={`/video/${video._id}`} onClick={handleViews} style={{ textDecoration: "none" }}>
       <Container type={type}>
         <Image
           type={type}
