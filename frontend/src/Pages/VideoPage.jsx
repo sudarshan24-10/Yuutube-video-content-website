@@ -126,6 +126,8 @@ const Subscribe = styled.button`
   cursor: pointer;
 `;
 const VideoPage = () => {
+  const currentUrl = window.location.href;
+  const urlId=currentUrl.split('/')[4];
   const {currentUser}=useSelector((state)=>state.user);
   const {currentVideo} = useSelector((state)=>state.video);
   const dispatch=useDispatch();
@@ -181,7 +183,7 @@ const VideoPage = () => {
   };
   return (
     <>
-    <Helmet><title>Yuutube</title></Helmet>
+    {currentVideo._id===urlId?<Helmet><title>{currentVideo.title}</title></Helmet>:<Helmet><title>Yuutube</title></Helmet>}
     <Container>
       {loading?<Loading></Loading>:error?<ErrorComponent></ErrorComponent>:<Content>
       <VideoWrapper>

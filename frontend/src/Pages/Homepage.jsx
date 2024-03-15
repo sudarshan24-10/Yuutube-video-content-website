@@ -4,6 +4,7 @@ import Card from "../Components/Card";
 import axios from "axios";
 import Loading from "../utils/loading";
 import ErrorComponent from "../utils/Error";
+import { Helmet } from "react-helmet";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -28,12 +29,15 @@ const Homepage = ({type}) => {
   }, [type]);
 
   return (
+    <>
+    <Helmet><title>Yuutube</title></Helmet>
     <Container>
       {loading?<Loading></Loading>:Error?<ErrorComponent></ErrorComponent>:videos.map((video)=>(
         <Card  key={video._id} video={video}></Card>
       ) 
       )}
     </Container>
+    </>
   );
 };
 
