@@ -133,7 +133,6 @@ const VideoPage = () => {
   const [channel,setChannel]=useState({});
   const [error,setError]=useState(false);
   const [loading,setLoading]=useState(true);
-  const videoId=useRef(currentVideo._id);
   useEffect(()=>{
     const fetchData=async ()=>{
       try{
@@ -237,7 +236,7 @@ const VideoPage = () => {
         <Hr />
         <Comments videoId={currentVideo._id}></Comments>
       </Content>}
-      <Recommendation className="recomendation" tags={currentVideo?.tags} currentVideoId={videoId.current}/>
+      <Recommendation className="recomendation" tags={currentVideo?.tags}/>
     </Container>
     </>
   )
