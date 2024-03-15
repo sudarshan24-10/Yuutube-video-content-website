@@ -7,16 +7,18 @@ const Container = styled.div`
   flex: 2;
 `;
 
-const Recommendation = ({tags}) => {
-  const [videos, setVideos] = useState([]);
+const Recommendation = ({tags,currentVideoId}) => {
+  const [videos,setVideos]=useState([]);
   useEffect(() => {
     const fetchVideos = async () => {
       const res=await axios.get(`/api/videos/tags?tags=${tags}`);
-      console.log(res.data);
-      setVideos(res.data);
+      const updatedData = res.data.filter((obj)=>
+        obj._id!==currentVideoId
+      );
+      setVideos(updatedData);
     };
     fetchVideos();
-  }, [tags]);
+  }, [tags,currentVideoId]);
 
   return (
     <Container>

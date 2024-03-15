@@ -6,7 +6,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Visibility from "@mui/icons-material/Visibility";
 import { loginStart,loginFailure,loginSuccess } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
-import { signInWithRedirect } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import {auth,provider} from "../firebase";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
@@ -119,25 +119,23 @@ const SignIn = () => {
     }
   }
 
-  const signInWithGoogle = async () => {
-    signInWithRedirect(auth, provider)
-      .then((result) => {
-        axios
-          .post("/api/auth/google", {
-            name: result.user.displayName,
-            email: result.user.email,
-            img: result.user.photoURL,
-          })
-          .then((res) => {
-            dispatch(loginSuccess(res.data));
-            navigate("/");
-          });
-      })
-      .catch((error) => {
-        console.log(error.message)
-        dispatch(loginFailure());
+  const signInWithGoogle =async() => {
+    try{
+      const data=await signInWithPopup(auth,provider);
+      const res= await axios.post("/api/auth/google",{
+        name:data.user.displayName,
+        email:data.user.email,
+        img:data.user.photoURL
       });
+      dispatch(loginSuccess(res.data));
+      navigate("/")
+    }catch(e){
+      console.log(e.message)
+        dispatch(loginFailure());
+    }
   };
+
+  
 
   const handleSignup=async()=>{
     try{

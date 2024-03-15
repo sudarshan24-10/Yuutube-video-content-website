@@ -4,14 +4,13 @@ import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutl
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from '../Components/Comments';
-import Card from '../Components/Card';
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import axios from "axios";
 import { useDispatch,useSelector } from "react-redux";
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { dislike, fetchFailure, fetchStart, fetchSuccess, like } from '../redux/videoSlice';
+import { useEffect, useRef, useState } from 'react';
+import { dislike,fetchSuccess, like } from '../redux/videoSlice';
 import { format } from 'timeago.js';
 import { subscription } from '../redux/userSlice';
 import Recommendation from "../Components/Recommendations";
@@ -134,6 +133,7 @@ const VideoPage = () => {
   const [channel,setChannel]=useState({});
   const [error,setError]=useState(false);
   const [loading,setLoading]=useState(true);
+  const videoId=useRef(currentVideo._id);
   useEffect(()=>{
     const fetchData=async ()=>{
       try{
@@ -237,7 +237,7 @@ const VideoPage = () => {
         <Hr />
         <Comments videoId={currentVideo._id}></Comments>
       </Content>}
-      <Recommendation className="recomendation" tags={currentVideo?.tags} />
+      <Recommendation className="recomendation" tags={currentVideo?.tags} currentVideoId={videoId.current}/>
     </Container>
     </>
   )
