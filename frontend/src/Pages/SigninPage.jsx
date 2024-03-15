@@ -120,16 +120,15 @@ const SignIn = () => {
   }
 
   const signInWithGoogle =async() => {
-    console.log("signInWithGoogle started");
     try{
       const data=await signInWithPopup(auth,provider);
-      console.log(data.user);
+  
       const res= await axios.post("/api/auth/google",{
         name:data.user.displayName,
         email:data.user.email,
         img:data.user.photoURL
       });
-      console.log("set cookie"+document.cookie);
+    
       dispatch(loginSuccess(res.data));
       navigate("/")
     }catch(e){

@@ -10,6 +10,7 @@ import SignIn from './Pages/SigninPage';
 import { ToastContainer } from 'react-toastify';
 import Search from './Pages/SearchPage';
 import UserDropdown from './Components/UserDropdown';
+import AccountOverview from './Pages/AccountOverview';
 const Container = styled.div`
   display: flex;
 `;
@@ -44,6 +45,7 @@ function App() {
           <Route path="trends" element={<Homepage type="sub" />} />
           <Route path="subscriptions" element={<Homepage type="sub" />} />
           <Route path="search" element={<Search />} />
+          <Route path="account_overview" element={<AccountOverview></AccountOverview>}></Route>
           <Route
                     path="signin"
                     element={<SignIn />}
