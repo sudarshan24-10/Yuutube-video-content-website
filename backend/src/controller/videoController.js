@@ -125,3 +125,19 @@ export const search = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getTitles = async(req,res, next) => {
+  const query = req.query.q;
+  try{
+    const titles = await Video.find({title:{$regex: query, $options: "i"}},{_id:0,title:1}).limit(10);
+    const titlesArray=[];
+    for(let i of titles){
+      titlesArray.push(i.title);
+    }
+
+    res.status(200).json(titlesArray);
+  }catch(e){
+
+    next(e);
+  }
+};

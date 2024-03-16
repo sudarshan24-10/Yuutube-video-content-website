@@ -9,11 +9,13 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: space-between;
 `;
 
 const Search = () => {
   const [videos, setVideos] = useState([]);
   const query = useLocation().search;
+  console.log(query);
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await axios.get(`/api/videos/search${query}`);

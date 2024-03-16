@@ -25,3 +25,16 @@ code {
   color: rgb(101, 144, 209);
   cursor: pointer;
 }
+
+.search-results{
+  display:flex;
+  flex-direction: column;
+  padding:3px;
+}
+
+
+.search-results:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  z-index: 1000;
+}
