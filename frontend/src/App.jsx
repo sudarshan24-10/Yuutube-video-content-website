@@ -2,7 +2,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import Menu from './Components/Menu';
 import Navbar from './Components/Navbar';
 import { darkTheme, lightTheme } from './utils/Theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from './Pages/Homepage';
 import VideoPage from './Pages/VideoPage';
@@ -11,6 +11,9 @@ import { ToastContainer } from 'react-toastify';
 import Search from './Pages/SearchPage';
 import UserDropdown from './Components/UserDropdown';
 import AccountOverview from './Pages/AccountOverview';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { loginSuccess } from './redux/userSlice';
 const Container = styled.div`
   display: flex;
 `;
@@ -30,6 +33,21 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [toggle,setToggle]=useState(true);
   const [show,setShow] = useState(false);
+  const dispatch=useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+  async function tokengenerateGoogle(currentUser) {
+    const res= await axios.post("/api/auth/google",{
+        name:currentUser.name,
+        email:currentUser.email,
+        img:currentUser.img,
+    });
+    dispatch(loginSuccess(res.data));
+  }
+  useEffect(() => {
+    if(currentUser.fromGoogle===true){
+      tokengenerateGoogle(currentUser);
+    }
+  },[]);
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
     <Container >

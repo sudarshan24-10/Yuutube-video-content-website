@@ -122,13 +122,14 @@ const SignIn = () => {
   const signInWithGoogle =async() => {
     try{
       const data=await signInWithPopup(auth,provider);
-  
+      
+     
       const res= await axios.post("/api/auth/google",{
         name:data.user.displayName,
         email:data.user.email,
         img:data.user.photoURL
       });
-    
+
       dispatch(loginSuccess(res.data));
       navigate("/")
     }catch(e){

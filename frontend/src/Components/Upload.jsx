@@ -50,7 +50,7 @@ const Close = styled.div`
   top:20px;
   right: 20px;
   cursor: pointer;
-  color: white;
+  color: ${({ theme }) => theme.text};
   width: 2rem;
   height: 2rem;
   font-size:1.5rem;
@@ -110,6 +110,21 @@ const Upload = ({setOpen}) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+
+  const videoUpload=(e)=>{
+    const file = e.target.files[0];
+    if (file.type !== 'video/mp4') {
+      // File is not an MP4 file
+      // Handle the error or notify the user
+      toast.error('Please upload an MP4 file.');
+      // Reset the input field to clear the selected file
+      e.target.value = null;
+    } else {
+      // File is an MP4 file
+      // Continue with handling the file
+      setVideo(file);
+    }
+  }
 
   const handleTags = (e) => {
     setTags(e.target.value.split(","));
@@ -183,7 +198,7 @@ const Upload = ({setOpen}) => {
           <Input
             type="file"
             accept="video/*"
-            onChange={(e) => setVideo(e.target.files[0])}
+            onChange={(e) => videoUpload(e)}
           />
         )}
         <Input
