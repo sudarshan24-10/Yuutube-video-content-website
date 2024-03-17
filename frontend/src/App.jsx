@@ -51,7 +51,7 @@ function App() {
     }else{
       return;
     }
-  },[currentUser.name]);
+  },[currentUser?.name]);
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
     <Container >
