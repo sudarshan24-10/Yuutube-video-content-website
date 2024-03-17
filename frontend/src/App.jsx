@@ -14,6 +14,7 @@ import AccountOverview from './Pages/AccountOverview';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { loginSuccess } from './redux/userSlice';
+
 const Container = styled.div`
   display: flex;
 `;
@@ -35,19 +36,22 @@ function App() {
   const [show,setShow] = useState(false);
   const dispatch=useDispatch();
   const { currentUser } = useSelector((state) => state.user);
-  async function tokengenerateGoogle(currentUser) {
-    const res= await axios.post("/api/auth/google",{
-        name:currentUser.name,
-        email:currentUser.email,
-        img:currentUser.img,
-    });
-    dispatch(loginSuccess(res.data));
-  }
   useEffect(() => {
     if(currentUser.fromGoogle===true){
+      async function tokengenerateGoogle(currentUser) {
+        const res= await axios.post("/api/auth/google",{
+            name:currentUser.name,
+            email:currentUser.email,
+            img:currentUser.img,
+        });
+        dispatch(loginSuccess(res.data));
+      }
+
       tokengenerateGoogle(currentUser);
+    }else{
+      return;
     }
-  },[]);
+  },[currentUser.name]);
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
     <Container >
