@@ -37,7 +37,7 @@ function App() {
   const dispatch=useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   useEffect(() => {
-    if(currentUser.fromGoogle===true){
+    if(currentUser?.fromGoogle===true){
       async function tokengenerateGoogle(currentUser) {
         const res= await axios.post("/api/auth/google",{
             name:currentUser.name,
