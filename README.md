@@ -29,11 +29,12 @@
    git clone https://github.com/sudarshan24-10/Youtube_Clone.git
 2. **Install Dependencies**   
 
-- cd Youtube_Clone
-- cd backend
-- npm install
-- cd ../frontend
-- npm install
+cd Youtube_Clone
+cd backend
+npm install
+cd ../frontend
+npm install
+
 
 3. **Set up environment variables:**
 - **Create a .env file in the backend directory and add the following variables:**
