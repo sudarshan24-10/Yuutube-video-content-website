@@ -59,7 +59,9 @@
 
 ![Screenshot from 2024-03-31 11-42-01](https://github.com/sudarshan24-10/Ecommerce-Web-App/assets/60260411/fc13b369-0789-416f-9daa-27716d7475b2)
 
-Demo Video![Screenshot from 2024-03-31 11-42-01](https://github.com/sudarshan24-10/Ecommerce-Web-App/assets/60260411/fc13b369-0789-416f-9daa-27716d7475b2)(https://youtu.be/M8qVc6SE1ro)
+Demo Video![Screenshot from 2024-03-31 11-42-01](https://github.com/sudarshan24-10/Ecommerce-Web-App/assets/60260411/fc13b369-0789-416f-9daa-27716d7475b2)
+##### Youtube link to the demo video 
+(https://youtu.be/M8qVc6SE1ro)
 
 
 ##### added Light and dark themme functionality also.
