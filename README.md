@@ -64,7 +64,7 @@ Demo Video![Screenshot from 2024-03-31 11-42-01](https://github.com/sudarshan24-
 (https://youtu.be/M8qVc6SE1ro)
 
 
-##### added Light and dark themme functionality also.
+##### added Light and dark theme functionality also.
 
 
 ### Feel free to customize this template according to your project's specific features and requirements.
