@@ -36,17 +36,24 @@ import { useSelector } from "react-redux";
 
 const Container = styled.div`
   max-width: ${(props) => (props.$toggle ? "3.5rem" : "17rem")};
-  width: 100%;
+  width: ${(props) => (props.$toggle ? "3.5rem" : "17rem")};
   background-color: ${({ theme }) => theme.bgLighter};
   height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
   color: ${({ theme }) => theme.text};
   font-size: 14px;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  z-index: 200;
   display: flex;
   flex-direction: column;
-  transition: max-width 0.3s ease;
+  transition: max-width 0.3s ease, width 0.3s ease;
 `;
+
+
+
 
 
 const HoverableIcon = styled.div`
@@ -162,13 +169,13 @@ const Menu = (props) => {
         </Item>
         </Link>
         
-        <Link to="/trend" style={{ textDecoration: "none", color: "inherit" }} >
+        <Link to="/trends" style={{ textDecoration: "none", color: "inherit" }} >
         <Item>
           <ExploreOutlinedIcon />
           Explore
         </Item>
         </Link>
-        <Link to="/sub" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/subscriptions" style={{ textDecoration: "none", color: "inherit" }}>
         <Item>
           <SubscriptionsOutlinedIcon />
           Subscriptions
@@ -179,10 +186,11 @@ const Menu = (props) => {
           <VideoLibraryOutlinedIcon />
           Library
         </Item>
+        <Link to="/history" style={{ textDecoration: "none", color: "inherit" }} >
         <Item>
           <HistoryOutlinedIcon />
           History
-        </Item>
+        </Item></Link>
         <Hr />
         {!currentUser &&
           <>
@@ -243,8 +251,8 @@ const Menu = (props) => {
       </Wrapper>}
       <ToggleOff><StyledMenuIcon style={{cursor:"pointer"}} onClick={handleToggleMenu}><MenuIcon></MenuIcon></StyledMenuIcon>
       {props.toggle && <><Link  style={{ textDecoration: "none", color: "inherit" }} to="/"><HoverableIcon><HomeIcon></HomeIcon></HoverableIcon></Link>
-      <Link style={{ textDecoration: "none", color: "inherit" }} to="trend"><HoverableIcon><ExploreOutlinedIcon></ExploreOutlinedIcon></HoverableIcon></Link>
-      <Link  style={{ textDecoration: "none", color: "inherit" }} to="subs"><HoverableIcon><SubscriptionsOutlinedIcon></SubscriptionsOutlinedIcon></HoverableIcon></Link></>}
+      <Link style={{ textDecoration: "none", color: "inherit" }} to="trends"><HoverableIcon><ExploreOutlinedIcon></ExploreOutlinedIcon></HoverableIcon></Link>
+      <Link  style={{ textDecoration: "none", color: "inherit" }} to="subscriptions"><HoverableIcon><SubscriptionsOutlinedIcon></SubscriptionsOutlinedIcon></HoverableIcon></Link></>}
       </ToggleOff>
     </Container>
   );

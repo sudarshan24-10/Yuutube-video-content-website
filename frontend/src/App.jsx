@@ -17,11 +17,13 @@ import { loginSuccess } from './redux/userSlice';
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;
 
 const Wrapper = styled.div`
-  padding: 22px 96px;
-  overflow: hidden;
+  margin-left: 60px;
+  padding:  22px;
   z-index:10;
 `;
 
@@ -29,6 +31,7 @@ const Main = styled.div`
   max-width: 100%;
   flex:1;
   background-color: ${({ theme }) => theme.bg};
+  
 `;
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -56,18 +59,20 @@ function App() {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
     <Container >
       <BrowserRouter>
-      <Menu toggle={toggle} setToggle={setToggle} darkMode={darkMode} setDarkMode={setDarkMode} ></Menu>
       <Main>
       <Navbar setShow={setShow} show={show} toggle={toggle}></Navbar>
       {show && <UserDropdown setShow={setShow} ></UserDropdown>}
+      <Menu toggle={toggle} setToggle={setToggle} darkMode={darkMode} setDarkMode={setDarkMode} ></Menu>
       <Wrapper>
         <Routes>
           <Route path='/'>
           <Route index element={<Homepage type="random" />} />
-          <Route path="trends" element={<Homepage type="sub" />} />
+          <Route path="trends" element={<Homepage type="trend" />} />
           <Route path="subscriptions" element={<Homepage type="sub" />} />
+          <Route path="history" element = {<Homepage type="getHistory"/>}></Route>
           <Route path="search" element={<Search />} />
           <Route path="account_overview" element={<AccountOverview></AccountOverview>}></Route>
+          <></>
           <Route
                     path="signin"
                     element={<SignIn />}

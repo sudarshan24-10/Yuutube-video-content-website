@@ -6,6 +6,7 @@ import videoRoute from "./src/routes/videoRoute.js";
 import authRoute from "./src/routes/authRoute.js";
 import userRoute from "./src/routes/userRoute.js";
 import commentsRoute from "./src/routes/commentsRoute.js";
+import historyRoute from "./src/routes/historyRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from 'path';
@@ -37,6 +38,7 @@ app.use("/api/videos", videoRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/comments", commentsRoute);
+app.use("/api/history", historyRoute);
 
 app.use((err, req, res, next) => {
   console.error(err);

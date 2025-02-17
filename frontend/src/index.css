@@ -1,12 +1,39 @@
-body {
+html, body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgba(15, 15, 15, 0.171);
+  overflow-y: scroll; /* ✅ Allows scrolling */
+  height: 100%;  /* Change 100vh to 100% */
+  min-height: 100vh; /* Ensure full viewport coverage */
+  display: flex; /* ✅ Helps layout stretch */
+  flex-direction: column;
 }
+
+
+/* ✅ Hide scrollbar for Chrome, Safari, Edge */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+/* ✅ Hide scrollbar for Firefox */
+html, body {
+  scrollbar-width: none;
+}
+
+/* ✅ Hide scrollbar for IE & Edge */
+html, body {
+  -ms-overflow-style: none;
+}
+
+
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

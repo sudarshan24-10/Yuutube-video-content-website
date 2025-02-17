@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 import {format} from 'timeago.js';
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "430px"};
@@ -58,6 +59,7 @@ const Card = (props) => {
   const video=props.video;
   const type=props.type;
   const [channel,setChannel] = useState({});
+  const { currentUser } = useSelector((state) => state.user);
   useEffect(() => {
     const fetchChannels = async () => {
       try {
@@ -77,8 +79,25 @@ const Card = (props) => {
     }
   }
 
+  const addHistoryRequest = {
+    userId:currentUser._id ,
+    videoId: video._id,
+  }
+
+
+  const handleUpdateHistory = async ()=>{
+    try{
+      const response = await axios.post(`/api/history/storeHistory`,addHistoryRequest,{
+        withCredentials: true,  // ✅ Allows cookies to be sent with request
+      });
+      // console.log(JSON.stringify(response));
+    }catch(e){
+      console.log(e);
+    }
+  }
+
   return (
-    <Link to={`/video/${video._id}`} onClick={handleViews} style={{ textDecoration: "none" }}>
+    <Link to={`/video/${video._id}`} onClick={()=>{handleViews();handleUpdateHistory();}} style={{ textDecoration: "none" }}>
       <Container type={type}>
         <Image
           type={type}

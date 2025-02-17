@@ -73,6 +73,7 @@ const Button = styled.button`
 
 const Logo = styled.div`
   margin-top:1.5rem;
+  margin-left:3rem;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -129,6 +130,8 @@ const Avatar = styled.img`
   border-radius: 50%;
   background-color: #999;
 `;
+
+
 
 const Navbar = (props) => {
   const navigate = useNavigate();

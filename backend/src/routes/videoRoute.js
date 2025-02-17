@@ -16,5 +16,6 @@ router.get("/sub",verifyToken, sub)
 router.get("/tags", getByTag)
 router.get("/search", search)
 router.get("/titles",getTitles);
+router.get("/trend", trend);
 
 export default router;
