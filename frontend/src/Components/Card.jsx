@@ -78,7 +78,7 @@ const Card = (props) => {
       console.log(e);
     }
   }
-  const addHistoryRequest = null
+  let addHistoryRequest = null
   if(currentUser!==null){
     addHistoryRequest = {
       userId:currentUser._id ,
