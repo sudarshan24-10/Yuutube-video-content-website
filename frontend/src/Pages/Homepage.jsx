@@ -30,12 +30,12 @@ const Homepage = ({type}) => {
     const fetchVideos = async () => {
       let res = null;
       try{
-        // if (type!=="getHistory") {
-        //   res = await axios.get(`/api/videos/${type}`);
-        // }else{
-        //   res = await axios.get(`/api/history/${type}`);
-        // }
-        res = await axios.get(`/api/videos/${type}`);
+        if (type!=="getHistory") {
+          res = await axios.get(`/api/videos/${type}`);
+        }else{
+          res = await axios.get(`/api/history/${type}`);
+        }
+        console.log(res.data);
         setVideos(res.data);
         setLoading(false);
       }catch(e){
@@ -44,7 +44,6 @@ const Homepage = ({type}) => {
     };
     fetchVideos();
   }, [type]);
-  console.log("video id:",videos[0]._id);
   return (
     <>
     <Helmet><title>Yuutube</title></Helmet>
