@@ -78,6 +78,7 @@ const Card = (props) => {
       console.log(e);
     }
   }
+  console.log("current user id",currentUser._id)
 
   const addHistoryRequest = {
     userId:currentUser._id ,
@@ -87,7 +88,7 @@ const Card = (props) => {
 
   const handleUpdateHistory = async ()=>{
     try{
-      const response = await axios.post(`/api/history/storeHistory`,addHistoryRequest,{
+      await axios.post(`/api/history/storeHistory`,addHistoryRequest,{
         withCredentials: true,  // ✅ Allows cookies to be sent with request
       });
       // console.log(JSON.stringify(response));
@@ -95,7 +96,7 @@ const Card = (props) => {
       console.log(e);
     }
   }
-
+  console.log("video id",video._id);
   return (
     <Link to={`/video/${video._id}`} onClick={()=>{handleViews();handleUpdateHistory();}} style={{ textDecoration: "none" }}>
       <Container type={type}>

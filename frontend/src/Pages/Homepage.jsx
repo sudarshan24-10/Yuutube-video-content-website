@@ -35,7 +35,6 @@ const Homepage = ({type}) => {
         }else{
           res = await axios.get(`/api/history/${type}`);
         }
-        console.log(res.data)
         setVideos(res.data);
         setLoading(false);
       }catch(e){
