@@ -23,7 +23,6 @@ const el=document.getElementById("root");
 const root = ReactDOM.createRoot(el);
 
 root.render(
-    <React.StrictMode>
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <ErrorBoundary onError={(e) => console.log(e.message)} FallbackComponent={FallbackComponent}>
@@ -31,6 +30,4 @@ root.render(
       </ErrorBoundary>
     </PersistGate>
     </Provider>
-    </React.StrictMode>
-  
 );

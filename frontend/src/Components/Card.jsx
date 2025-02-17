@@ -78,7 +78,6 @@ const Card = (props) => {
       console.log(e);
     }
   }
-  console.log("current user id",currentUser._id)
 
   const addHistoryRequest = {
     userId:currentUser._id ,
@@ -96,7 +95,6 @@ const Card = (props) => {
       console.log(e);
     }
   }
-  console.log("video id",video._id);
   return (
     <Link to={`/video/${video._id}`} onClick={()=>{handleViews();handleUpdateHistory();}} style={{ textDecoration: "none" }}>
       <Container type={type}>
