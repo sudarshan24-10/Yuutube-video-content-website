@@ -43,7 +43,7 @@ const Homepage = ({type}) => {
     };
     fetchVideos();
   }, [type]);
-
+  console.log("video id:",videos[0]._id);
   return (
     <>
     <Helmet><title>Yuutube</title></Helmet>
