@@ -57,7 +57,6 @@ const Homepage = ({ type }) => {
     fetchVideos();
   }, [type]);
 
-  console.log(videos);
 
   return (
     <>
