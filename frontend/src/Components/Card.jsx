@@ -78,14 +78,19 @@ const Card = (props) => {
       console.log(e);
     }
   }
-
-  const addHistoryRequest = {
-    userId:currentUser._id ,
-    videoId: video._id,
+  const addHistoryRequest = null
+  if(currentUser!==null){
+    addHistoryRequest = {
+      userId:currentUser._id ,
+      videoId: video._id,
+    }
   }
 
 
   const handleUpdateHistory = async ()=>{
+    if(currentUser===null){
+      return
+    }
     try{
       await axios.post(`/api/history/storeHistory`,addHistoryRequest,{
         withCredentials: true,  // ✅ Allows cookies to be sent with request
