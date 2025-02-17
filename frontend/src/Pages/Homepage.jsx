@@ -30,11 +30,12 @@ const Homepage = ({type}) => {
     const fetchVideos = async () => {
       let res = null;
       try{
-        if (type!=="getHistory") {
-          res = await axios.get(`/api/videos/${type}`);
-        }else{
-          res = await axios.get(`/api/history/${type}`);
-        }
+        // if (type!=="getHistory") {
+        //   res = await axios.get(`/api/videos/${type}`);
+        // }else{
+        //   res = await axios.get(`/api/history/${type}`);
+        // }
+        res = await axios.get(`/api/videos/${type}`);
         setVideos(res.data);
         setLoading(false);
       }catch(e){
