@@ -3,7 +3,7 @@ import Menu from './Components/Menu';
 import Navbar from './Components/Navbar';
 import { darkTheme, lightTheme } from './utils/Theme';
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Homepage from './Pages/Homepage';
 import VideoPage from './Pages/VideoPage';
 import SignIn from './Pages/SigninPage';
@@ -23,70 +23,82 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   margin-left: 60px;
-  padding:  22px;
-  z-index:10;
+  padding: 22px;
+  z-index: 10;
 `;
 
 const Main = styled.div`
   max-width: 100%;
-  flex:1;
+  flex: 1;
   background-color: ${({ theme }) => theme.bg};
-  
 `;
+
+const MessageContainer = styled.div`
+  text-align: center;
+  font-size: 24px;
+  margin: 20px;
+  color: rgb(255, 255, 255);
+`;
+
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [toggle,setToggle]=useState(true);
-  const [show,setShow] = useState(false);
-  const dispatch=useDispatch();
+  const [toggle, setToggle] = useState(true);
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+
   useEffect(() => {
-    if(currentUser?.fromGoogle===true){
+    if (currentUser?.fromGoogle === true) {
       async function tokengenerateGoogle(currentUser) {
-        const res= await axios.post("/api/auth/google",{
-            name:currentUser.name,
-            email:currentUser.email,
-            img:currentUser.img,
+        const res = await axios.post("/api/auth/google", {
+          name: currentUser.name,
+          email: currentUser.email,
+          img: currentUser.img,
         });
         dispatch(loginSuccess(res.data));
       }
-
       tokengenerateGoogle(currentUser);
-    }else{
-      return;
     }
-  },[currentUser?.name]);
+  }, [currentUser?.name]);
+
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-    <Container >
-      <BrowserRouter>
-      <Main>
-      <Navbar setShow={setShow} show={show} toggle={toggle}></Navbar>
-      {show && <UserDropdown setShow={setShow} ></UserDropdown>}
-      <Menu toggle={toggle} setToggle={setToggle} darkMode={darkMode} setDarkMode={setDarkMode} ></Menu>
-      <Wrapper>
-        <Routes>
-          <Route path='/'>
-          <Route index element={<Homepage type="random" />} />
-          <Route path="trends" element={<Homepage type="trend" />} />
-          <Route path="subscriptions" element={<Homepage type="sub" />} />
-          <Route path="history" element = {<Homepage type="getHistory"/>}></Route>
-          <Route path="search" element={<Search />} />
-          <Route path="account_overview" element={<AccountOverview></AccountOverview>}></Route>
-          <></>
-          <Route
-                    path="signin"
-                    element={<SignIn />}
-                  />
-                  <Route path="video">
-                    <Route path=":id" element={<VideoPage />} />
-                  </Route>
-          </Route>
-        </Routes>
-      </Wrapper>
-    </Main>
-    <ToastContainer position="bottom-center" className="toast" />
-    </BrowserRouter>
-    </Container>
+      <Container>
+        <BrowserRouter>
+          <Main>
+            <Navbar setShow={setShow} show={show} toggle={toggle} />
+            {show && <UserDropdown setShow={setShow} />}
+            <Menu toggle={toggle} setToggle={setToggle} darkMode={darkMode} setDarkMode={setDarkMode} />
+            <Wrapper>
+              <Routes>
+                <Route path="/">
+                  <Route index element={<Homepage type="random" />} />
+                  <Route path="trends" element={<Homepage type="trend" />} />
+                  <Route path="subscriptions" element={currentUser ? <Homepage type="sub" /> : (
+                    <MessageContainer>
+                      Please log in to view your subscriptions: <Link to="/signin">Login</Link>
+                    </MessageContainer>
+                  )} />
+                  <Route path="history" element={currentUser ? <Homepage type="getHistory" /> : (
+                    <MessageContainer>
+                      Please log in to view your history: <Link to="/signin">Login</Link>
+                    </MessageContainer>
+                  )} />
+                  <Route path="search" element={<Search />} />
+                  <Route path="account_overview" element={currentUser ? <AccountOverview /> : (
+                    <MessageContainer>
+                      Please log in to access your account: <Link to="/signin">Login</Link>
+                    </MessageContainer>
+                  )} />
+                  <Route path="signin" element={<SignIn />} />
+                  <Route path="video/:id" element={<VideoPage />} />
+                </Route>
+              </Routes>
+            </Wrapper>
+          </Main>
+          <ToastContainer position="bottom-center" className="toast" />
+        </BrowserRouter>
+      </Container>
     </ThemeProvider>
   );
 }
