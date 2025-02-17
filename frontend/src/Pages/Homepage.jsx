@@ -26,12 +26,12 @@ const MessageContainer = styled.div`
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 `;
 
 const Homepage = ({ type }) => {
   const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true); // Set loading to true initially
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
 
@@ -39,18 +39,18 @@ const Homepage = ({ type }) => {
     const fetchVideos = async () => {
       try {
         setLoading(true);
-        let res = null; // Set loading true when starting the API call
+        let res = null;
         if (type !== "getHistory") {
           res = await axios.get(`/api/videos/${type}`);
         } else {
           res = await axios.get(`/api/history/${type}`);
         }
         setVideos(res.data);
-        setLoading(false); // Set loading false when the data is fetched
+        setLoading(false);
       } catch (e) {
         console.log("Error fetching videos:", e);
         setError(true);
-        setLoading(false); // Set loading false in case of error
+        setLoading(false);
       }
     };
 
@@ -79,25 +79,26 @@ const Homepage = ({ type }) => {
 
       <Container>
         {loading ? (
-          <Loading /> // Show loading spinner or indicator
+          <Loading />
         ) : error ? (
-          <ErrorComponent /> // Show error message
-        ) : type === "getHistory" ? (
+          <ErrorComponent />
+        ) : type === "getHistory" || type === "sub" ? (
           currentUser ? (
             videos.length > 0 ? (
               videos.map((video) => <Card key={video._id} video={video} />)
             ) : (
-              <MessageContainer>No videos found in your history</MessageContainer> // Centered message with larger font
+              <MessageContainer>No videos found in {type === "getHistory" ? "your history" : "your subscriptions"}</MessageContainer>
             )
           ) : (
-            <><MessageContainer>Please log in to view your history: <Link to="/signin">Login</Link>
-</MessageContainer><></>
-                  </> // Centered message with larger font
+            <MessageContainer>
+              Please log in to view {type === "getHistory" ? "your history" : "your subscriptions"}:{" "}
+              <Link to="/signin">Login</Link>
+            </MessageContainer>
           )
         ) : videos.length > 0 ? (
           videos.map((video) => <Card key={video._id} video={video} />)
         ) : (
-          <MessageContainer>No videos available</MessageContainer> // Centered message with larger font
+          <MessageContainer>No videos available</MessageContainer>
         )}
       </Container>
     </>
