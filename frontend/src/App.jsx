@@ -69,7 +69,7 @@ function App() {
           <Route index element={<Homepage type="random" />} />
           <Route path="trends" element={<Homepage type="trend" />} />
           <Route path="subscriptions" element={<Homepage type="sub" />} />
-          <Route path="history" element = {<Homepage type="random"/>}></Route>
+          <Route path="history" element = {<Homepage type="getHistory"/>}></Route>
           <Route path="search" element={<Search />} />
           <Route path="account_overview" element={<AccountOverview></AccountOverview>}></Route>
           <></>

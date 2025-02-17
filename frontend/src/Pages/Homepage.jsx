@@ -28,13 +28,13 @@ const Homepage = ({ type }) => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        setLoading(true);  // Set loading true when starting the API call
-        // if (type !== "getHistory") {
-        //   res = await axios.get(`/api/videos/${type}`);
-        // } else {
-        //   res = await axios.get(`/api/history/${type}`);
-        // }
-        const res = await axios.get(`/api/videos/${type}`);
+        setLoading(true);
+        let res= null;  // Set loading true when starting the API call
+        if (type !== "getHistory") {
+          res = await axios.get(`/api/videos/${type}`);
+        } else {
+          res = await axios.get(`/api/history/${type}`);
+        }
         setVideos(res.data);
         setLoading(false);  // Set loading false when the data is fetched
       } catch (e) {
