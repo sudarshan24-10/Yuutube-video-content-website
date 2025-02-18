@@ -159,7 +159,7 @@ const Upload = ({ setOpen }) => {
   const [tags, setTags] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const availableTags = ['games', 'movies', 'sports', 'music', 'news', 'health', 'knowledge', 'nature'];
+  const availableTags = ['games', 'movies', 'sports', 'songs', 'news', 'health', 'news'];
 
   const handleChange = (e) => {
     setInputs((prev) => {

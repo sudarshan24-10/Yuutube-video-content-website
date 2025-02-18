@@ -2,18 +2,22 @@ import History from "../models/History.js";
 
 
 export const getWatchHistory = async (req, res, next) => {
-    try {
-      const userId = req.user.id;
-      console.log(userId);
-      const history = await History.find({ userId }).populate("videoId");
-      const videoData = history
-    .map(item => item.videoId)
-    .filter(video => video !== null);
-      res.status(200).json(videoData);
-    } catch (err) {
-      next(err);
-    }
-  };
+  try {
+    const userId = req.user.id;
+    console.log(userId);
+    const history = await History.find({ userId }).populate("videoId");
+
+    const videoData = history
+      .filter(item => item.videoId !== null)
+      .sort((a, b) => b.watchedAt - a.watchedAt) 
+      .map(item => item.videoId);
+
+    res.status(200).json(videoData);
+  } catch (err) {
+    next(err);
+  }
+};
+
 
 export const addToHistory = async (req, res, next) => {
     try {

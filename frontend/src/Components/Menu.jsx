@@ -207,30 +207,41 @@ const Menu = (props) => {
           </>
         }
         <Title>BEST OF YUUTUBE</Title>
+        <Link to="songs" style={{ textDecoration: "none",color: "inherit" }}>
         <Item>
           <LibraryMusicOutlinedIcon />
           Music
         </Item>
+        </Link>
+        <Link to="sports" style={{ textDecoration: "none",color: "inherit" }}>
         <Item>
           <SportsBasketballOutlinedIcon />
           Sports
-        </Item>
+        </Item></Link>
+
+        <Link to="games" style={{ textDecoration: "none",color: "inherit" }}>
         <Item>
           <SportsEsportsOutlinedIcon />
           Gaming
-        </Item>
+        </Item></Link>
+        
+        <Link to="movies" style={{ textDecoration: "none",color: "inherit" }}>
         <Item>
           <MovieOutlinedIcon />
           Movies
-        </Item>
+        </Item></Link>
+        
+        <Link to="news" style={{ textDecoration: "none",color: "inherit" }}>
         <Item>
           <ArticleOutlinedIcon />
           News
-        </Item>
+        </Item></Link>
+        
+        <Link to="live" style={{ textDecoration: "none",color: "inherit" }}>
         <Item>
           <LiveTvOutlinedIcon />
           Live
-        </Item>
+        </Item></Link>
         <Hr />
         <Item>
           <SettingsOutlinedIcon />

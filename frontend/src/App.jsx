@@ -74,6 +74,12 @@ function App() {
                 <Route path="/">
                   <Route index element={<Homepage type="random" />} />
                   <Route path="trends" element={<Homepage type="trend" />} />
+                  <Route path="games" element={<Homepage type="games" />} />
+                  <Route path="movies" element={<Homepage type="movies" />} />
+                  <Route path="songs" element={<Homepage type="songs" />} />
+                  <Route path="sports" element={<Homepage type="sports" />} />
+                  <Route path="news" element={<Homepage type="news" />} />
+                  <Route path="live" element={<Homepage type="live" />} />
                   <Route path="subscriptions" element={currentUser ? <Homepage type="sub" /> : (
                     <MessageContainer>
                       Please log in to view your subscriptions: <Link to="/signin">Login</Link>

@@ -19,14 +19,14 @@ const TrendTitles = styled.div`
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
 `;
 
 const MessageContainer = styled.div`
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: rgb(255, 255, 255);
+  color: ${({ theme }) => theme.text};
 `;
 
 const Homepage = ({ type }) => {
@@ -34,16 +34,24 @@ const Homepage = ({ type }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-
+  const tags = new Set(['games', 'movies', 'sports', 'songs', 'news', 'health', 'news'])
   useEffect(() => {
     const fetchVideos = async () => {
       try {
         setLoading(true);
         let res = null;
-        if (type !== "getHistory") {
+        if (type !== "getHistory" && !tags.has(type)) {
           res = await axios.get(`/api/videos/${type}`);
-        } else {
+        }
+        if (tags.has(type)) {
+          res=await axios.get(`/api/videos/tags?tags=${type}`);
+        }
+        
+        else if (type === "getHistory") {
           res = await axios.get(`/api/history/${type}`);
+        }
+        if(type === "getHistory"){
+          res.data.reverse();
         }
         setVideos(res.data);
         setLoading(false);
@@ -75,6 +83,10 @@ const Homepage = ({ type }) => {
       {type === "getHistory" && (
         <TrendTitles>Explore your viewing history and rewatch your favorites</TrendTitles>
       )}
+      {(type === "games" || type ==="sports" || type === "news" || type === 'songs' || type === "movies") && (
+        <TrendTitles>Dive into the world of {type} videos</TrendTitles>
+      )}
+
 
       <Container>
         {loading ? (
@@ -83,7 +95,7 @@ const Homepage = ({ type }) => {
           <ErrorComponent />
         ) : type === "getHistory" || type === "sub" ? (
           currentUser ? (
-            videos.length > 0 ? (
+            videos.length > 0 && Array.isArray(videos) ? (
               videos.map((video) => <Card key={video._id} video={video} />)
             ) : (
               <MessageContainer>No videos found in {type === "getHistory" ? "your history" : "your subscriptions"}</MessageContainer>
@@ -94,7 +106,7 @@ const Homepage = ({ type }) => {
               <Link to="/signin">Login</Link>
             </MessageContainer>
           )
-        ) : videos.length > 0 ? (
+        ) : videos.length > 0 && Array.isArray(videos)  ? (
           videos.map((video) => <Card key={video._id} video={video} />)
         ) : (
           <MessageContainer>No videos available</MessageContainer>
