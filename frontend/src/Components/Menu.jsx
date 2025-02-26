@@ -182,10 +182,12 @@ const Menu = (props) => {
         </Item>
         </Link>
         <Hr />
+        <Link to="/library" style={{ textDecoration: "none", color: "inherit" }} >
         <Item>
           <VideoLibraryOutlinedIcon />
           Library
         </Item>
+        </Link>
         <Link to="/history" style={{ textDecoration: "none", color: "inherit" }} >
         <Item>
           <HistoryOutlinedIcon />

@@ -14,6 +14,7 @@ import AccountOverview from './Pages/AccountOverview';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { loginSuccess } from './redux/userSlice';
+import LibraryPage from './Pages/Librarypage';
 
 const Container = styled.div`
   display: flex;
@@ -88,6 +89,11 @@ function App() {
                   <Route path="history" element={currentUser ? <Homepage type="getHistory" /> : (
                     <MessageContainer>
                       Please log in to view your history: <Link to="/signin">Login</Link>
+                    </MessageContainer>
+                  )} />
+                  <Route path="library" element={currentUser ? <LibraryPage type="getHistory" /> : (
+                    <MessageContainer>
+                      Please log in to view your Library: <Link to="/signin">Login</Link>
                     </MessageContainer>
                   )} />
                   <Route path="search" element={<Search />} />

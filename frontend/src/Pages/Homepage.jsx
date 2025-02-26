@@ -50,9 +50,9 @@ const Homepage = ({ type }) => {
         else if (type === "getHistory") {
           res = await axios.get(`/api/history/${type}`);
         }
-        if(type === "getHistory"){
-          res.data.reverse();
-        }
+        // if(type === "getHistory"){
+        //   res.data.reverse();
+        // }
         setVideos(res.data);
         setLoading(false);
       } catch (e) {
